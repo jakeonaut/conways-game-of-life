@@ -1,0 +1,73 @@
+body
+{
+	font-family: Trebuchet MS,Verdana;
+	font-size: 90%;
+	color:".$fontcolor.";
+	background-color: rgb(206,182,195);
+}
+#organizer
+{
+	margin: 0px auto;
+	position: relative;
+	max-width: 774px;
+}
+div.main
+{
+	width: 100%;
+	text-align:center;
+	min-height:500px;
+	margin: 0px auto; 
+	background-color: rgb(240, 233, 236);
+}
+div.action{
+	background:#fdfdfd;
+	font-size:14px;
+	float:left;
+	cursor:pointer;
+	
+	padding: 10px;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin: 10px;
+
+	outline: 1px solid black;
+	
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+div.action:hover{
+	outline: 2px solid black;
+}
+#lifeSelector{
+	font-size: 14px;
+	position: relative;
+	left: 100px;
+}
+#deathSelector{
+	font-size: 14px;
+	position: relative;
+	left: 88px;
+}
+#toggleGrid{
+	font-size: 14px;
+	position: relative;
+	left: 140px;
+}
+#speedSelector{
+	font-size: 14px;
+	position: relative;
+	left: 37px;
+}
+.themeBox{
+	float: left;
+	width:10px;
+	height:10px;
+	margin-left:3px;
+	border-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}

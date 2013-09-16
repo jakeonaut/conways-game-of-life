@@ -2,17 +2,21 @@ var canvas_width = 640;
 var canvas_height = 480;
 var canvas;
 var ctx;
+var drawGridSeperator = false;
 
 var lifeColor = "#ffffff";
 var deathColor = "#000000";
-var speed = 10;
+var gridColor = "#808080";
+var speed = 120;
 
-var res = 4;
+var res = 8;
 var width = canvas_width / res;
 var height = canvas_height / res;
+var paused = false;
 
 //Initialize the grid with a random seed
 var grid;
+var previewGrid;
 var initializeNewGrid = function(randomize){
 	var returnGrid = new Array();
 	for (var i = 0; i < height; i++){
@@ -26,9 +30,6 @@ var initializeNewGrid = function(randomize){
 	}
 	return returnGrid;
 };
-var randomize = function(){
-	grid = initializeNewGrid(true);
-};
 randomize();
  
 //WINDOW ONLOAD
@@ -36,14 +37,22 @@ window.onload = function(){
 	canvas = document.getElementById("lifeCanvas");
 	ctx = canvas.getContext("2d");
 
+	previewGrid = initializeNewGrid(false);
 	updateGrid();
 	drawGrid();
-	setInterval(update, speed);
+	document.getElementById("speedRange").value = 83;
+	speed = (10000 / document.getElementById("speedRange").value);
+	window.setTimeout(update,speed);
+	setInterval(draw, 120);
+	//document.getElementById("gridChecker").checked = true;
 };
 
 var update = function(){
-	updateGrid();
-	drawGrid();
+	if (!paused)
+		updateGrid();
+	
+	speed = (10000 / document.getElementById("speedRange").value);
+	window.setTimeout(update,speed);
 };
 
 var updateGrid = function(){
@@ -114,17 +123,44 @@ var updateGrid = function(){
 	nextGen = null;
 };
 
+var draw = function(){
+	drawGridSeperator = document.getElementById("gridChecker").checked;
+	drawGrid();
+	drawPreview();
+};
+
 var drawGrid = function(){
 	//Clear the grid
-	ctx.fillStyle=deathColor;
+	ctx.fillStyle=gridColor;
 	ctx.fillRect(0, 0, canvas_width, canvas_height);
 	
-	ctx.fillStyle=lifeColor;
 	for (var i = 0; i < height; i++){
 		for (var j = 0; j < width; j++){
 			if (grid[i][j]){
-				ctx.fillRect(j*res, i*res, res, res);
-			};
+				ctx.fillStyle=lifeColor;
+				if (drawGridSeperator)
+					ctx.fillRect(j*res+1, i*res+1, res-1, res-1);
+				else ctx.fillRect(j*res, i*res, res, res);
+			}else if (!previewGrid[i][j]){
+				ctx.fillStyle=deathColor;
+				if (drawGridSeperator)
+					ctx.fillRect(j*res+1, i*res+1, res-1, res-1);
+				else ctx.fillRect(j*res, i*res, res, res);
+			}
+		}
+	}
+};
+
+var drawPreview = function(){
+	//Clear the grid
+	ctx.fillStyle=gridColor;
+	
+	for (var i = 0; i < height; i++){
+		for (var j = 0; j < width; j++){
+			if (previewGrid[i][j]){
+				if (!grid[i][j])
+					ctx.fillRect(j*res, i*res, res, res);
+			}
 		}
 	}
 };
