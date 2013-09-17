@@ -46,21 +46,30 @@ div.action:hover{
 	font-size: 14px;
 	position: relative;
 	left: 100px;
+	float:left;
+}
+#lifeFormSelector{
+	font-size: 14px;
+	position: relative;
+	float:left;
+	left: 137px;
 }
 #deathSelector{
 	font-size: 14px;
 	position: relative;
 	left: 88px;
+	float:left;
+}
+#speedSelector{
+	font-size: 14px;
+	position: relative;
+	float:left;
+	left: 137px;
 }
 #toggleGrid{
 	font-size: 14px;
 	position: relative;
 	left: 140px;
-}
-#speedSelector{
-	font-size: 14px;
-	position: relative;
-	left: 37px;
 }
 .themeBox{
 	float: left;

@@ -1,34 +1,98 @@
 //INDIVIDUAL FUNCTIONS FOR INDIVIDUAL LIFEFORMS//////////////////////////////
-var setSmallCross = function(x, y, fillAs){
-	grid[y][x] = fillAs;
-	y -= 1; if (y < 0) y = height-1;
-	grid[y][x] = fillAs;
-	y += 1; if (y >= height) y = 0;
-	x -= 1; if (x < 0) x = width-1;
-	grid[y][x] = fillAs;
-	y += 1; if (y >= height) y = 0;
-	x += 1; if (x >= width) x = 0;
-	grid[y][x] = fillAs;
-	y -= 1; if (y < 0) y = height-1;
-	x += 1; if (x >= width) x= 0;
-	grid[y][x] = fillAs;
+var modx = function(x, inc){
+	x += inc;
+	if (x >= width) x = 0;
+	if (x < 0) x = width-1;
+	return x;
+};
+var mody = function(y, inc){
+	y += inc;
+	if (y >= height) y = 0;
+	if (y < 0) y = height-1;
+	return y;
 };
 
-//INDIVIDUAL FUNCTIONS FOR INDIVIDUAL LIFEFORMS//////////////////////////////
-var previewSmallCross = function(x, y, fillAs){
-	ctx.fillStyle=gridColor;
-	if (!fillAs) ctx.fillStyle=deathColor;
-	
-	previewGrid[y][x] = fillAs;
-	y -= 1; if (y < 0) y = height-1;
-	previewGrid[y][x] = fillAs;
-	y += 1; if (y >= height) y = 0;
-	x -= 1; if (x < 0) x = width-1;
-	previewGrid[y][x] = fillAs;
-	y += 1; if (y >= height) y = 0;
-	x += 1; if (x >= width) x = 0;
-	previewGrid[y][x] = fillAs;
-	y -= 1; if (y < 0) y = height-1;
-	x += 1; if (x >= width) x= 0;
-	previewGrid[y][x] = fillAs;
+var setPoint = function(x, y, fillAs, table){
+	table[y][x] = fillAs;
+};
+
+var setSmallCross = function(x, y, fillAs, table){
+	table[y][x] = fillAs;
+	y = mody(y, -1);
+	table[y][x] = fillAs;
+	y = mody(y, 1);
+	x = modx(x, -1);
+	table[y][x] = fillAs;
+	y = mody(y, 1);
+	x = modx(x, 1);
+	table[y][x] = fillAs;
+	y = mody(y, -1);
+	x = modx(x, 1);
+	table[y][x] = fillAs;
+};
+
+var setSquare = function(x, y, fillAs, table){
+	table[y][x] = fillAs;
+	x = modx(x, 1);
+	table[y][x] = fillAs;
+	y = mody(y, 1);
+	table[y][x] = fillAs;
+	x = modx(x, -1);
+	table[y][x] = fillAs;
+};
+
+var setGliderDR = function(x, y, fillAs, table){
+	//Glider going diagonally down-right
+	table[y][x] = fillAs;
+	x = modx(x, 1);
+	y = mody(y, 1);
+	table[y][x] = fillAs;
+	y = mody(y, 1);
+	table[y][x] = fillAs;
+	x = modx(x, -1);
+	table[y][x] = fillAs;
+	x = modx(x, -1);
+	table[y][x] = fillAs;
+};
+
+var setGliderUR = function(x, y, fillAs, table){
+	//Glider going diagonally up-right
+	table[y][x] = fillAs;
+	x = modx(x, 1);
+	y = mody(y, -1);
+	table[y][x] = fillAs;
+	x = modx(x, 1);
+	table[y][x] = fillAs;
+	y = mody(y, 1);
+	table[y][x] = fillAs;
+	y = mody(y, 1);
+	table[y][x] = fillAs;
+};
+
+var setGliderUL = function(x, y, fillAs, table){
+	//Glider going diagonally up-left
+	table[y][x] = fillAs;
+	x = modx(x, -1);
+	y = mody(y, -1);
+	table[y][x] = fillAs;
+	y = mody(y, -1);
+	table[y][x] = fillAs;
+	x = modx(x, 1);
+	table[y][x] = fillAs;
+	x = modx(x, 1);
+	table[y][x] = fillAs;
+};
+
+var setGliderDL = function(x, y, fillAs, table){
+	//Glider going diagonally down-left;
+	table[y][x] = fillAs;
+	x = modx(x, -1);
+	y = mody(y, 1);
+	table[y][x] = fillAs;
+	x = modx(x, -1);
+	table[y][x] = fillAs;
+	y = mody(y, -1);
+	table[y][x] = fillAs;
+	y = mody(y, -1);
+	table[y][x] = fillAs;
 };

@@ -20,7 +20,7 @@
 					</div>
 				<div style="clear:both;"></div>
 				<div id="lifeSettings" style="margin:5px;;">
-					<div id="lifeSelector">
+					<div id="lifeSelector"">
 						<div style="float:left;">'Life' Color:</div>
 						<div id="whiteLife" class="themeBox" style="background:#ffffff;" onclick="whiteLife()"></div>
 						<div id="purpleLife" class="themeBox" style="background:#ff6699;" onclick="purpleLife()"></div>
@@ -29,7 +29,23 @@
 						<div id="redLife" class="themeBox" style="background:#ff0000;" onclick="redLife()"></div>
 						<div id="greenLife" class="themeBox" style="background:#a4e676" onclick="greenLife()"></div>
 						<div id="blackLife" class="themeBox" style="background:#000000;" onclick="blackLife()"></div>
-					</div><br/>
+					</div>
+					<div id="lifeFormSelector">
+						<div style="float:left;">Lifeform to Draw:</div>
+						<div style="float:left;">
+							<select id="lifeFormSelect" style="margin-top:-1px;" onchange="changeLifeForm();">
+								<option value="LifeFormEnum.POINT">Point</option>
+								<option value="LifeFormEnum.CROSS"  selected>Cross</option>
+								<option value="LifeFormEnum.SQUARE">Square</option>
+								<option value="LifeFormEnum.GLIDER_UR">Glider (Up-Right)</option>
+								<option value="LifeFormEnum.GLIDER_DR">Glider (Down-Right)</option>
+								<option value="LifeFormEnum.GLIDER_DL">Glider (Down-Left)</option>
+								<option value="LifeFormEnum.GLIDER_UL">Glider (Up-Left)</option>
+							</select>
+						</div>
+					</div>
+					<br/>
+					<div style="clear:both;">
 					<div id="deathSelector">
 						<div style="float:left;">'Death' Color:</div>
 						<div id="blackDeath" class="themeBox" style="background:#000000;" onclick="blackDeath()"></div>
@@ -39,15 +55,16 @@
 						<div id="orangeDeath" class="themeBox" style="background:#fae161;" onclick="orangeDeath()"></div>
 						<div id="purpleDeath" class="themeBox" style="background:#ff6699;" onclick="purpleDeath()"></div>
 						<div id="whiteDeath" class="themeBox" style="background:#ffffff;" onclick="whiteDeath()"></div>
+					</div>
+					<div id="speedSelector">
+						<div style="float:left;">Game Speed:</div>
+						<input id="speedRange" type="range" style="float:left;" min="10" max="1000">
 					</div><br/>
+					<div style="clear:both;">
 					<div id="toggleGrid">
 						<div style="float:left;margin-top:1px;">Grid:</div>
 						<input id="gridChecker" type="checkbox" style="float:left;">
 					</div><br/>
-					<div id="speedSelector">
-						<div style="float:left;">Game Speed:</div>
-						<input id="speedRange" type="range" style="float:left;" min="10" max="1000">
-					</div>
 				</div>
 				<br/>
 				<p>
