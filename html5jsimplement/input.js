@@ -56,6 +56,8 @@ var decideWhichLife = function(x, y, fillAs, table){
 	}
 };
 
+var prevX = -1;
+var prevY = -1;
 var previewLife = function(event){
 	var coords = canvas.relMouseCoords(event);
 	if (coords.x >= 0 && coords.x < canvas_width && coords.y >= 0 && coords.y < canvas_height){
@@ -66,11 +68,15 @@ var previewLife = function(event){
 		//Preview Life
 		previewGrid = decideWhichLife(x, y, true, previewGrid);
 		
-		if (leftMouseDown){
-			grid = decideWhichLife(x, y, true, grid);
-		}else if (rightMouseDown){
-			grid = decideWhichLife(x, y, false, grid);
+		if (prevX != x || prevY != y){
+			if (leftMouseDown){
+				grid = decideWhichLife(x, y, true, grid);
+			}else if (rightMouseDown){
+				grid = decideWhichLife(x, y, false, grid);
+			}
 		}
+		prevX = x;
+		prevY = y;
 	}
 };
 
