@@ -27,13 +27,37 @@ LifeFormEnum = {
     GLIDER_DR : "glider down-right",
 	GLIDER_UR : "glider up-right",
 	GLIDER_UL : "glider up-left",
-	GLIDER_DL : "glider down-left"
+	GLIDER_DL : "glider down-left",
+	SHIP_R: "ship right",
+	SHIP_D: "ship down",
+	SHIP_L: "ship left",
+	SHIP_U: "ship up"
 };
 var currLifeForm = LifeFormEnum.CROSS;
 
 var changeLifeForm = function(){
 	var selector = document.getElementById("lifeFormSelect");
 	currLifeForm = eval(selector.options[selector.selectedIndex].value);
+};
+
+var endScreenSettings = function(){
+	var selector = document.getElementById("wrapChecker");
+	switch(selector.options[selector.selectedIndex].value)
+	{
+		case '0':
+			wrapContent = true;
+			killWall = false;
+			break;
+		case '1':
+			wrapContent = false;
+			killWall = false;
+			break;
+		case '2':
+			wrapContent = false;
+			killWall = true;
+			break;
+		default: break;
+	}
 };
 
 var decideWhichLife = function(x, y, fillAs, table){
@@ -52,6 +76,14 @@ var decideWhichLife = function(x, y, fillAs, table){
 			return setGliderUL(x, y, fillAs, table);
 		case LifeFormEnum.GLIDER_DL:
 			return setGliderDL(x, y, fillAs, table);
+		case LifeFormEnum.SHIP_R:
+			return setShipR(x, y, fillAs, table);
+		case LifeFormEnum.SHIP_D:
+			return setShipD(x, y, fillAs, table);
+		case LifeFormEnum.SHIP_L:
+			return setShipL(x, y, fillAs, table);
+		case LifeFormEnum.SHIP_U:
+			return setShipU(x, y, fillAs, table);
 		default: return null;
 	}
 };

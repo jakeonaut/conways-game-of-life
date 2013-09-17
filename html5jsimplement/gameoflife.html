@@ -71,8 +71,13 @@
 						<input id="gridChecker" type="checkbox" style="float:left;">
 					</div>
 					<div id="toggleWrap">
-						<div style="float:left;margin-top:1px;">Wrap Screen:</div>
-						<input id="wrapChecker" type="checkbox" style="float:left;">
+						<div style="float:left;margin-top:1px;">Screen Edges:</div>
+						<select id="wrapChecker" style="float:left;" style="margin-top:-1px;" onchange="endScreenSettings()">
+							<option value="0" selected>Wrap Edges</option>
+							<option value="1">Walls</option>
+							<option value="2">Killer Walls</option>
+						</select>
+						<!--<input id="wrapChecker" type="checkbox" style="float:left;">-->
 					</div>
 					<br/>
 					<div style="clear:both;"></div>

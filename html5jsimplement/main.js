@@ -15,7 +15,8 @@ var res = 8;
 var width = canvas_width / res;
 var height = canvas_height / res;
 var paused = false;
-var wrapContent = false;
+var wrapContent = true;
+var killWall = false;
 
 //Initialize the grid with a random seed
 var grid;
@@ -61,7 +62,6 @@ var update = function(){
 		window.setTimeout(update, 10);
 		return;
 	}
-	wrapContent = document.getElementById("wrapChecker").checked;
 	updateGrid();
 	
 	speed = (10000 / document.getElementById("speedRange").value);
@@ -142,6 +142,11 @@ var updateGrid = function(){
 					nextGen[i][j] = false;
 				else if (numLiveNeighbors > 3)
 					nextGen[i][j] = false;
+				if (killWall){
+					if (i == 0 || i == height-1 || j == 0 || j == width-1)
+						nextGen[i][j] = false;
+				}
+					
 			}else if (numLiveNeighbors == 3)
 				nextGen[i][j] = true;
 		}
