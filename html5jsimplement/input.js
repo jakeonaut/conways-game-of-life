@@ -65,6 +65,12 @@ var previewLife = function(event){
 		clearPreview();
 		//Preview Life
 		previewGrid = decideWhichLife(x, y, true, previewGrid);
+		
+		if (leftMouseDown){
+			grid = decideWhichLife(x, y, true, grid);
+		}else if (rightMouseDown){
+			grid = decideWhichLife(x, y, false, grid);
+		}
 	}
 };
 
@@ -72,14 +78,31 @@ var clearPreview = function(event){
 	previewGrid = initializeNewGrid(false);
 };
 
-var clickToAddLife = function(event){
+var clickMouseDown = function(event){
+	if (event.which == 1){
+		leftMouseDown = true;
+		clickToAddLife(event, true);
+	}else if (event.which == 3){
+		rightMouseDown = true;
+		clickToAddLife(event, false);
+	}
+};
+
+var clickMouseUp = function(event){
+	if (event.which == 1)
+		leftMouseDown = false;
+	else if (event.which == 3)
+		rightMouseDown = false;
+};
+
+var clickToAddLife = function(event, fillAs){
 	var coords = canvas.relMouseCoords(event);
 	if (coords.x >= 0 && coords.x < canvas_width && coords.y >= 0 && coords.y < canvas_height){
 		var y = parseInt(coords.y/res);
 		var x = parseInt(coords.x/res);
 		
 		//Create Life
-		grid = decideWhichLife(x, y, true, grid);
+		grid = decideWhichLife(x, y, fillAs, grid);
 	}
 };
 

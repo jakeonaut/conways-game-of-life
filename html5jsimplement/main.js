@@ -9,6 +9,8 @@ var deathColor = "#000000";
 var gridColor = "#808080";
 var speed = 120;
 
+var leftMouseDown = false;
+var rightMouseDown = false;
 var res = 8;
 var width = canvas_width / res;
 var height = canvas_height / res;
@@ -37,6 +39,7 @@ randomize();
 window.onload = function(){
 	canvas = document.getElementById("lifeCanvas");
 	canvas.onselectstart = function () { return false; }
+	canvas.oncontextmenu = function() { return false; } 
 	ctx = canvas.getContext("2d");
 
 	previewGrid = initializeNewGrid(false);

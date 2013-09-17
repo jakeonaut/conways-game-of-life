@@ -13,7 +13,9 @@
 		<div id="organizer">
 			<div class="main">
 				<br/>
-				<canvas id="lifeCanvas" width="640" height="480" style="border:3px groove #ffffff;" onclick="clickToAddLife(event);" onmousemove="previewLife(event);" onmouseout="clearPreview();"></canvas>
+				<canvas id="lifeCanvas" width="640" height="480" style="border:3px groove #ffffff;"
+				onmousedown="clickMouseDown(event);" onmouseup="clickMouseUp(event);"
+				onmousemove="previewLife(event);" onmouseout="clearPreview();"></canvas>
 				<div style="width:640px; margin:0px auto;">
 					<div id="pauseButton" class="action" onclick="pauseLife();" style="width:80px;">Pause Game</div>
 					<div class="action" onclick="randomize();">Randomize Life</div>
@@ -75,7 +77,7 @@
 					<a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life" target="_blank">Conway's Game of Life</a> using HTML5 and javascript!<br/>
 					<i>(javascript must be enabled in order to play)</i>
 					<br/><br/>
-					<i><b>(Click on the canvas to add new "life")</b></i>
+					<i><b>(Click on the canvas to add new "life". Right click to erase.)</b></i>
 					<br/><br/>
 					<i><a href="http://www.bitstorm.org/gameoflife/lexicon/" target="_blank">Lexicon of Known Shapes</a></i>
 				</p>
