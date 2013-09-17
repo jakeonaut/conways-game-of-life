@@ -32,7 +32,6 @@ var initializeNewGrid = function(randomize){
 	return returnGrid;
 };
 randomize();
-savedGrid = grid.slice(0);
  
 //WINDOW ONLOAD
 window.onload = function(){
@@ -41,18 +40,22 @@ window.onload = function(){
 	ctx = canvas.getContext("2d");
 
 	previewGrid = initializeNewGrid(false);
+	savedGrid = grid.slice(0);
 	updateGrid();
 	drawGrid();
 	document.getElementById("speedRange").value = 83;
 	speed = (10000 / document.getElementById("speedRange").value);
 	window.setTimeout(update,speed);
-	setInterval(draw, 120);
+	setInterval(draw, 10);
 	//document.getElementById("gridChecker").checked = true;
 };
 
 var update = function(){
-	if (!paused)
-		updateGrid();
+	if (paused){
+		window.setTimeout(update, 10);
+		return;
+	}
+	updateGrid();
 	
 	speed = (10000 / document.getElementById("speedRange").value);
 	window.setTimeout(update,speed);

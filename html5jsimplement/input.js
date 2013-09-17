@@ -39,27 +39,20 @@ var changeLifeForm = function(){
 var decideWhichLife = function(x, y, fillAs, table){
 	switch (currLifeForm){
 		case LifeFormEnum.POINT:
-			setPoint(x, y, fillAs, table);
-			break;
+			return setPoint(x, y, fillAs, table);
 		case LifeFormEnum.CROSS:
-			setSmallCross(x, y, fillAs, table);
-			break;
+			return setSmallCross(x, y, fillAs, table);
 		case LifeFormEnum.SQUARE:
-			setSquare(x, y, fillAs, table);
-			break;
+			return setSquare(x, y, fillAs, table);
 		case LifeFormEnum.GLIDER_DR:
-			setGliderDR(x, y, fillAs, table);
-			break;
+			return setGliderDR(x, y, fillAs, table);
 		case LifeFormEnum.GLIDER_UR:
-			setGliderUR(x, y, fillAs, table);
-			break;
+			return setGliderUR(x, y, fillAs, table);
 		case LifeFormEnum.GLIDER_UL:
-			setGliderUL(x, y, fillAs, table);
-			break;
+			return setGliderUL(x, y, fillAs, table);
 		case LifeFormEnum.GLIDER_DL:
-			setGliderDL(x, y, fillAs, table);
-			break;
-		default: break;
+			return setGliderDL(x, y, fillAs, table);
+		default: return null;
 	}
 };
 
@@ -71,7 +64,7 @@ var previewLife = function(event){
 		
 		clearPreview();
 		//Preview Life
-		decideWhichLife(x, y, true, previewGrid);
+		previewGrid = decideWhichLife(x, y, true, previewGrid);
 	}
 };
 
@@ -86,7 +79,7 @@ var clickToAddLife = function(event){
 		var x = parseInt(coords.x/res);
 		
 		//Create Life
-		decideWhichLife(x, y, true, grid);
+		grid = decideWhichLife(x, y, true, grid);
 	}
 };
 
@@ -100,11 +93,15 @@ var clearGrid = function(){
 };
 
 var saveGrid = function(){
-	savedGrid = grid.slice(0);
+	for (var i = 0; i < grid.length; i++){
+		savedGrid[i] = grid[i].slice(0);
+	}
 };
 
 var loadGrid = function(){
-	grid = savedGrid.slice(0);
+	for (var i = 0; i < grid.length; i++){
+		grid[i] = savedGrid[i].slice(0);
+	}
 };
 
 var pauseLife = function(){
@@ -115,3 +112,28 @@ var pauseLife = function(){
 	}
 	paused = !paused;
 };
+
+//FROM http://stackoverflow.com/questions/7837456/comparing-two-arrays-in-javascript
+Array.prototype.compare = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0; i < this.length; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].compare(array[i]))
+                return false;
+        }
+        else if (this[i] != array[i]) {
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;
+        }
+    }
+    return true;
+}
