@@ -1,8 +1,8 @@
 //INDIVIDUAL FUNCTIONS FOR INDIVIDUAL LIFEFORMS//////////////////////////////
 var modx = function(x, inc){
 	x += inc;
-	if (x >= width) x = 0;
-	if (x < 0) x = width-1;
+	if (x >= width && wrapContent) x = 0;
+	if (x < 0 && wrapContent) x = width-1;
 	return x;
 };
 var mody = function(y, inc){

@@ -15,6 +15,7 @@ var res = 8;
 var width = canvas_width / res;
 var height = canvas_height / res;
 var paused = false;
+var wrapContent = false;
 
 //Initialize the grid with a random seed
 var grid;
@@ -44,8 +45,10 @@ window.onload = function(){
 
 	previewGrid = initializeNewGrid(false);
 	savedGrid = grid.slice(0);
+	document.getElementById("wrapChecker").checked = true;
 	updateGrid();
 	drawGrid();
+	
 	document.getElementById("speedRange").value = 83;
 	speed = (10000 / document.getElementById("speedRange").value);
 	window.setTimeout(update,speed);
@@ -58,6 +61,7 @@ var update = function(){
 		window.setTimeout(update, 10);
 		return;
 	}
+	wrapContent = document.getElementById("wrapChecker").checked;
 	updateGrid();
 	
 	speed = (10000 / document.getElementById("speedRange").value);
@@ -73,48 +77,64 @@ var updateGrid = function(){
 			var y;
 			//check for left neighbor/////////////////////////////////////
 			x = j-1; y = i;
-			if (x < 0) x = width-1; 
-			if (grid[y][x])
-				numLiveNeighbors++;
+			if ((x < 0 && wrapContent) || x >= 0){
+				if (x < 0) x = width-1; 
+				if (grid[y][x])
+					numLiveNeighbors++;
+			}
 			//check for LEFT + TOP neighbor//////////////////////////////
 			x = j-1; y = i-1;
-			if (x < 0) x = width-1;
-			if (y < 0) y = height-1;
-			if (grid[y][x])
-				numLiveNeighbors++;
+			if (((x < 0 || y <0) && wrapContent) || x >= 0 && y >= 0){
+				if (x < 0) x = width-1;
+				if (y < 0) y = height-1;
+				if (grid[y][x])
+					numLiveNeighbors++;
+			}
 			//check for top neighbor/////////////////////////////////////
 			x = j; y = i-1;
-			if (y < 0) y = height-1;
-			if (grid[y][x])
-				numLiveNeighbors++;
+			if ((y < 0 && wrapContent) || y >= 0){
+				if (y < 0) y = height-1;
+				if (grid[y][x])
+					numLiveNeighbors++;
+			}
 			//check for RIGHT + TOP neighbor////////////////////////////////
 			x = j+1; y = i-1;
-			if (x >= width) x = 0;
-			if (y < 0) y = height-1;
-			if (grid[y][x])
-				numLiveNeighbors++;
+			if (((x >= width || y <0) && wrapContent) || x < width && y >= 0){
+				if (x >= width) x = 0;
+				if (y < 0) y = height-1;
+				if (grid[y][x])
+					numLiveNeighbors++;
+			}
 			//check for right neighbor/////////////////////////////////////
 			x = j+1; y = i;
-			if (x >= width) x = 0;
-			if (grid[y][x])
-				numLiveNeighbors++;
+			if ((x >= width && wrapContent) || x < width){
+				if (x >= width) x = 0;
+				if (grid[y][x])
+					numLiveNeighbors++;
+			}
 			//check for RIGHT + BOTTOM neighbor///////////////////////////
 			x = j+1; y = i+1;
-			if (x >= width) x = 0;
-			if (y >= height) y = 0;
-			if (grid[y][x])
-				numLiveNeighbors++;
+			if (((x >= width || y >= height) && wrapContent) || x < width && y < height){
+				if (x >= width) x = 0;
+				if (y >= height) y = 0;
+				if (grid[y][x])
+					numLiveNeighbors++;
+			}
 			//check for BOTTOM neighbor///////////////////////////////////
 			x = j; y = i+1;
-			if (y >= height) y = 0;
-			if (grid[y][x])
-				numLiveNeighbors++;
+			if ((y >= height && wrapContent) || y < height){
+				if (y >= height) y = 0;
+				if (grid[y][x])
+					numLiveNeighbors++;
+			}
 			//check for LEFT + BOTTOM neighbor////////////////////////////
 			x = j-1; y = i+1;
-			if (x < 0) x = width-1;
-			if (y >= height) y = 0;
-			if (grid[y][x])
-				numLiveNeighbors++;
+			if (((x < 0 || y >= height) && wrapContent) || x >= 0 && y < height){
+				if (x < 0) x = width-1;
+				if (y >= height) y = 0;
+				if (grid[y][x])
+					numLiveNeighbors++;
+			}
 			
 			nextGen[i][j] = grid[i][j];
 			if (grid[i][j]){
