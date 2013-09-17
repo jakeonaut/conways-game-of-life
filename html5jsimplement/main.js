@@ -17,6 +17,7 @@ var paused = false;
 //Initialize the grid with a random seed
 var grid;
 var previewGrid;
+var savedGrid;
 var initializeNewGrid = function(randomize){
 	var returnGrid = new Array();
 	for (var i = 0; i < height; i++){
@@ -31,10 +32,12 @@ var initializeNewGrid = function(randomize){
 	return returnGrid;
 };
 randomize();
+savedGrid = grid.slice(0);
  
 //WINDOW ONLOAD
 window.onload = function(){
 	canvas = document.getElementById("lifeCanvas");
+	canvas.onselectstart = function () { return false; }
 	ctx = canvas.getContext("2d");
 
 	previewGrid = initializeNewGrid(false);

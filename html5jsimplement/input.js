@@ -99,6 +99,14 @@ var clearGrid = function(){
 	grid = initializeNewGrid(false);
 };
 
+var saveGrid = function(){
+	savedGrid = grid.slice(0);
+};
+
+var loadGrid = function(){
+	grid = savedGrid.slice(0);
+};
+
 var pauseLife = function(){
 	if (!paused){
 		document.getElementById("pauseButton").innerHTML="Play Game";

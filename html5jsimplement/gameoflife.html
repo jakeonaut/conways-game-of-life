@@ -3,6 +3,7 @@
 	<head>
 		<title>gameoflife</title>
 		<link href="style.css" rel="stylesheet" type="text/css">
+		<script language="javascript" type="text/javascript" src="html5slider.js"></script>
 		<script language="javascript" type="text/javascript" src="lifeForms.js"></script>
 		<script language="javascript" type="text/javascript" src="input.js"></script>
 		<script language="javascript" type="text/javascript" src="main.js"></script>
@@ -13,10 +14,12 @@
 			<div class="main">
 				<br/>
 				<canvas id="lifeCanvas" width="640" height="480" style="border:3px groove #ffffff;" onclick="clickToAddLife(event);" onmousemove="previewLife(event);" onmouseout="clearPreview();"></canvas>
-				<div style="width:380px; margin:0px auto;">
+				<div style="width:640px; margin:0px auto;">
 					<div id="pauseButton" class="action" onclick="pauseLife();" style="width:80px;">Pause Game</div>
 					<div class="action" onclick="randomize();">Randomize Life</div>
 					<div class="action" onclick="clearGrid();">Clear Canvas</div>
+					<div class="action" onclick="saveGrid();">Save State</div>
+					<div class="action" onclick="loadGrid();">Load State</div>
 					</div>
 				<div style="clear:both;"></div>
 				<div id="lifeSettings" style="margin:5px;;">
@@ -69,9 +72,10 @@
 				<br/>
 				<p>
 					An interactive reimplementation of 
-					<a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life" target="_blank">Conway's Game of Life</a> using HTML5 and javascript!
+					<a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life" target="_blank">Conway's Game of Life</a> using HTML5 and javascript!<br/>
+					<i>(javascript must be enabled in order to play)</i>
 					<br/><br/>
-					<i>(Click on the canvas to add new "life")</i>
+					<i><b>(Click on the canvas to add new "life")</b></i>
 					<br/><br/>
 					<i><a href="http://www.bitstorm.org/gameoflife/lexicon/" target="_blank">Lexicon of Known Shapes</a></i>
 				</p>
